@@ -28,6 +28,23 @@ vector2D gen2Dmatrix(int n){
 
 }
 
+//2D matrix addition
+vector2D rank2TensorAdd(int n,vector2D A, vector2D B){
+ 
+ vector1D temp(n,0);
+ vector2D C(n,temp);
+ 
+ for (auto i = 0;i < n; i++){
+     for(auto j = 0; j<n; j++){
+	C[i][j] = A[i][j]+B[i][j];
+      }
+ }
+ 
+ return C;
+
+}
+
+
 //2D matrix multiplication
 vector2D rank2TensorMult(vector2D A, vector2D B){
 
@@ -86,7 +103,7 @@ int main(){
         cout << "Please input the size(n) of the matrix: ";
         cin>> n;
         cout << endl;
-
+           
         auto A = gen2Dmatrix(n);
         auto B = gen2Dmatrix(n);
 
@@ -95,12 +112,17 @@ int main(){
 
 	cout << " Matrix B =  "<< endl;
 	display(B);
-	
-        
-	auto C = rank2TensorMult(A,B);
 
-        cout <<" Matrix C =  "<< endl;
+	auto C = rank2TensorMult(A,B);
+	auto C_1 = rank2TensorAdd(n,A,B);
+        	
+        cout << " MULTIPLICATION" << endl;
+	cout <<" Matrix C =  "<< endl;
         display(C);
+
+        cout << " ADDITION" << endl;
+	cout <<" Matrix C_1 =  "<< endl;
+        display(C_1);
 
 return 0;}
 
