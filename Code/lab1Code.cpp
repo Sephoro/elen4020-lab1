@@ -73,7 +73,21 @@ vector2D rank2TensorMult(vector2D A, vector2D B){
  }
 
 
-return C;
+  return C;
+}
+
+//generate random 3D matrix with numbers between 0 and 20
+vector3D gen3Dmatrix(int n){
+
+  vector3D matrix;
+   
+  for(int i = 0; i< n ; i++){
+
+  	matrix.push_back(gen2Dmatrix(n));
+  }
+ 
+  return matrix;
+
 }
 
 
@@ -157,13 +171,13 @@ void print(vector3D x){
 
 int main(){
 
-        /*srand(time(0));
+        srand(time(0));
 	auto n = 0;
         cout << "Please input the size(n) of the matrix: ";
         cin>> n;
         cout << endl;
            
-        auto A = gen2Dmatrix(n);
+        /*auto A = gen2Dmatrix(n);
         auto B = gen2Dmatrix(n);
 		auto C_one = gen2Dmatrix(n);
 
@@ -191,7 +205,7 @@ int main(){
 	*/
 
 
-	auto A = vector2D{ vector1D{2,5,1},
+	/*auto A = vector2D{ vector1D{2,5,1},
 		           vector1D{3,6,2},
 		           vector1D{1,0,1}};
 				
@@ -201,15 +215,23 @@ int main(){
       
        	
 	auto A3 = vector3D{A,B,A};
-       	auto B3 = vector3D{B,A,B};
+       	auto B3 = vector3D{B,A,B};*/
+        
+        auto A3 = gen3Dmatrix(n);
+        auto B3 = gen3Dmatrix(n);
 
         print(A3);
-        cout << " X \n\n\n ";
+        cout << " x \n\n\n ";
         print(B3);
 
-        auto C3 = rank3TensorAdd(3,A3,B3);
+        //auto C3 = rank3TensorAdd(n,A3,B3);
+        //cout << "  =  " << "\n\n";
+       	//print(C3);
+      
+        auto C3_ = rank3TensorMult(A3,B3);
         cout << "  =  " << "\n\n";
-       	print(C3);
+       	print(C3_);
+        
         
        
 
