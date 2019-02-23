@@ -79,7 +79,7 @@ return C;
 
 //Display matrix
 
-void display(vector2D x){
+void print(vector2D x){
 
 	auto n = x.size();
 
@@ -99,20 +99,18 @@ void display(vector2D x){
 
 vector3D rank3TensorMult(vector3D a, vector3D b)
 {
-	
-		 auto C = vector3D{};
+	        auto  n = a.size();
+		auto C = vector3D{};
+
+		for(auto i = 0; i < n; i++){
 		
-		auto Layer1 = vector<vector2D>{a.at(0),b.at(0)};
-		auto Layer2 = vector<vector2D>{a.at(1),b.at(1)};
-		auto Layer3 = vector<vector2D>{a.at(2),b.at(2)};
-		
-		auto First = rank2TensorMult(Layer1.at(0), Layer1.at(1));
-		auto Second = rank2TensorMult(Layer2.at(0), Layer2.at(1));
-		auto Third = rank2TensorMult(Layer3.at(0), Layer2.at(1));
-		
-		C.push_back(First);
-		C.push_back(Second);
-		C.push_back(Third);
+		       auto subC = vector2D{};
+                       
+                       subC = rank2TensorMult(a.at(i),b.at(i));
+		       
+		       C.push_back(subC);
+                               
+			}
 		
 		return C;
 		 
@@ -122,25 +120,36 @@ vector3D rank3TensorMult(vector3D a, vector3D b)
 
 vector3D rank3TensorAdd(int n,vector3D a, vector3D b)
 {
+	
 		auto C = vector3D{};
+
+		for(auto i = 0; i < n; i++){
 		
-		auto Layer1 = vector<vector2D>{a.at(0),b.at(0)};
-		auto Layer2 = vector<vector2D>{a.at(1),b.at(1)};
-		auto Layer3 = vector<vector2D>{a.at(2),b.at(2)};
-		
-		auto First = rank2TensorAdd(n,Layer1.at(0), Layer1.at(1));
-		auto Second = rank2TensorAdd(n,Layer2.at(0), Layer2.at(1));
-		auto Third = rank2TensorAdd(n,Layer3.at(0), Layer2.at(1));
-		
-		C.push_back(First);
-		C.push_back(Second);
-		C.push_back(Third);
-	
-	
+		       auto subC = vector2D{};
+                       
+                       subC = rank2TensorAdd(n,a.at(i),b.at(i));
+		       
+		       C.push_back(subC);
+                               
+			}
 	return C;
 }
 
 
+void print(vector3D x){
+
+   auto n = x.size();
+      
+       	  cout << "===========\n" << endl;
+       
+	for(int i = 0; i < n; i++){
+
+            print(x[i]);
+
+          	 }
+
+	  cout << "===========\n" << endl;
+}
 
 
 
@@ -148,7 +157,7 @@ vector3D rank3TensorAdd(int n,vector3D a, vector3D b)
 
 int main(){
 
-        srand(time(0));
+        /*srand(time(0));
 	auto n = 0;
         cout << "Please input the size(n) of the matrix: ";
         cin>> n;
@@ -179,52 +188,30 @@ int main(){
         display(C_1);
 			cout <<endl;
 			cout <<endl;
-		//3D MATRICES
-			auto matrix3D1 = vector3D{A,B,C_one};
-			cout << "FIRST 3D MATRIX is made of : " << " LAYER 1: MATRIX A, LAYER 2: MATRIX B, LAYER 3: MATRIX C_one " <<endl;
-			auto matrix3D2 = vector3D{C_one,B,A};
-			cout <<endl;
-			cout <<endl;
-			cout << "FIRST 3D MATRIX is made of : " << " LAYER 1: MATRIX C_one, LAYER 2: MATRIX B, LAYER 3: MATRIX A " <<endl;
-			
-		//3D MULTIPLICATION
-			auto MultResult = rank3TensorMult(matrix3D1, matrix3D2);
-			cout <<endl;
-			cout <<endl;
+	*/
 
-			cout << "3DMULTIPLICATION RESULT" <<endl;
-			cout <<endl;
-			cout <<endl;
-			cout << "LAYER 1 OF RESULT" <<endl;
-			display(MultResult.at(0));
-			cout <<endl;
-			cout <<endl;
-			cout << "LAYER 2 OF RESULT" <<endl;
-			display(MultResult.at(1));
-			cout <<endl;
-			cout <<endl;
-			cout << "LAYER 3 OF RESULT" <<endl;
-			display(MultResult.at(2));
 
-		//3D ADDITION
-		
-		auto additionMatrix = rank3TensorAdd(n,matrix3D1, matrix3D2);
-			cout <<endl;
-			cout <<endl;
+	auto A = vector2D{ vector1D{2,5,1},
+		           vector1D{3,6,2},
+		           vector1D{1,0,1}};
+				
+        auto B = vector2D{vector1D{0,1,1},
+			  vector1D{2,2,2},
+	                  vector1D{4,5,1}};
+      
+       	
+	auto A3 = vector3D{A,B,A};
+       	auto B3 = vector3D{B,A,B};
 
-			cout << "3D ADDITION RESULT" <<endl;
-			cout <<endl;
-			cout <<endl;
-			cout << "LAYER 1 OF RESULT" <<endl;
-			display(additionMatrix.at(0));
-			cout <<endl;
-			cout <<endl;
-			cout << "LAYER 2 OF RESULT" <<endl;
-			display(additionMatrix.at(1));
-			cout <<endl;
-			cout <<endl;
-			cout << "LAYER 3 OF RESULT" <<endl;
-			display(additionMatrix.at(2));
+        print(A3);
+        cout << " X \n\n\n ";
+        print(B3);
+
+        auto C3 = rank3TensorAdd(3,A3,B3);
+        cout << "  =  " << "\n\n";
+       	print(C3);
+        
+       
 
 
 return 0;}
