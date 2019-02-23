@@ -95,6 +95,7 @@ void display(vector2D x){
 	cout << endl;
 }
 
+//3D MULTIPLICATION
 
 vector3D rank3TensorMult(vector3D a, vector3D b)
 {
@@ -116,6 +117,33 @@ vector3D rank3TensorMult(vector3D a, vector3D b)
 		return C;
 		 
 }
+
+//3D ADDITION
+
+vector3D rank3TensorAdd(int n,vector3D a, vector3D b)
+{
+		auto C = vector3D{};
+		
+		auto Layer1 = vector<vector2D>{a.at(0),b.at(0)};
+		auto Layer2 = vector<vector2D>{a.at(1),b.at(1)};
+		auto Layer3 = vector<vector2D>{a.at(2),b.at(2)};
+		
+		auto First = rank2TensorAdd(n,Layer1.at(0), Layer1.at(1));
+		auto Second = rank2TensorAdd(n,Layer2.at(0), Layer2.at(1));
+		auto Third = rank2TensorAdd(n,Layer3.at(0), Layer2.at(1));
+		
+		C.push_back(First);
+		C.push_back(Second);
+		C.push_back(Third);
+	
+	
+	return C;
+}
+
+
+
+
+
 
 
 int main(){
@@ -143,11 +171,11 @@ int main(){
 	auto C_1 = rank2TensorAdd(n,A,B);
         	
         cout << "2D MULTIPLICATION of A X B" << endl;
-	cout <<" Matrix C =  "<< endl;
+		cout <<" Matrix C =  "<< endl;
         display(C);
 
         cout << " ADDITION Result of A + B" << endl;
-	cout <<" Matrix C_1 =  "<< endl;
+		cout <<" Matrix C_1 =  "<< endl;
         display(C_1);
 			cout <<endl;
 			cout <<endl;
@@ -179,6 +207,25 @@ int main(){
 			display(MultResult.at(2));
 
 		//3D ADDITION
+		
+		auto additionMatrix = rank3TensorAdd(n,matrix3D1, matrix3D2);
+			cout <<endl;
+			cout <<endl;
+
+			cout << "3D ADDITION RESULT" <<endl;
+			cout <<endl;
+			cout <<endl;
+			cout << "LAYER 1 OF RESULT" <<endl;
+			display(additionMatrix.at(0));
+			cout <<endl;
+			cout <<endl;
+			cout << "LAYER 2 OF RESULT" <<endl;
+			display(additionMatrix.at(1));
+			cout <<endl;
+			cout <<endl;
+			cout << "LAYER 3 OF RESULT" <<endl;
+			display(additionMatrix.at(2));
+
 
 return 0;}
 
