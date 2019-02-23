@@ -96,6 +96,28 @@ void display(vector2D x){
 }
 
 
+vector3D rank3TensorMult(vector3D a, vector3D b)
+{
+	
+		 auto C = vector3D{};
+		
+		auto Layer1 = vector<vector2D>{a.at(0),b.at(0)};
+		auto Layer2 = vector<vector2D>{a.at(1),b.at(1)};
+		auto Layer3 = vector<vector2D>{a.at(2),b.at(2)};
+		
+		auto First = rank2TensorMult(Layer1.at(0), Layer1.at(1));
+		auto Second = rank2TensorMult(Layer2.at(0), Layer2.at(1));
+		auto Third = rank2TensorMult(Layer3.at(0), Layer2.at(1));
+		
+		C.push_back(First);
+		C.push_back(Second);
+		C.push_back(Third);
+		
+		return C;
+		 
+}
+
+
 int main(){
 
         srand(time(0));
@@ -106,23 +128,57 @@ int main(){
            
         auto A = gen2Dmatrix(n);
         auto B = gen2Dmatrix(n);
+		auto C_one = gen2Dmatrix(n);
 
         cout << " Matrix A =  "<< endl;
         display(A);
 
 	cout << " Matrix B =  "<< endl;
 	display(B);
+	
+		cout << " Matrix C_one =  "<< endl;
+	display(C_one);
 
 	auto C = rank2TensorMult(A,B);
 	auto C_1 = rank2TensorAdd(n,A,B);
         	
-        cout << " MULTIPLICATION" << endl;
+        cout << "2D MULTIPLICATION of A X B" << endl;
 	cout <<" Matrix C =  "<< endl;
         display(C);
 
-        cout << " ADDITION" << endl;
+        cout << " ADDITION Result of A + B" << endl;
 	cout <<" Matrix C_1 =  "<< endl;
         display(C_1);
+			cout <<endl;
+			cout <<endl;
+		//3D MATRICES
+			auto matrix3D1 = vector3D{A,B,C_one};
+			cout << "FIRST 3D MATRIX is made of : " << " LAYER 1: MATRIX A, LAYER 2: MATRIX B, LAYER 3: MATRIX C_one " <<endl;
+			auto matrix3D2 = vector3D{C_one,B,A};
+			cout <<endl;
+			cout <<endl;
+			cout << "FIRST 3D MATRIX is made of : " << " LAYER 1: MATRIX C_one, LAYER 2: MATRIX B, LAYER 3: MATRIX A " <<endl;
+			
+		//3D MULTIPLICATION
+			auto MultResult = rank3TensorMult(matrix3D1, matrix3D2);
+			cout <<endl;
+			cout <<endl;
+
+			cout << "3DMULTIPLICATION RESULT" <<endl;
+			cout <<endl;
+			cout <<endl;
+			cout << "LAYER 1 OF RESULT" <<endl;
+			display(MultResult.at(0));
+			cout <<endl;
+			cout <<endl;
+			cout << "LAYER 2 OF RESULT" <<endl;
+			display(MultResult.at(1));
+			cout <<endl;
+			cout <<endl;
+			cout << "LAYER 3 OF RESULT" <<endl;
+			display(MultResult.at(2));
+
+		//3D ADDITION
 
 return 0;}
 
