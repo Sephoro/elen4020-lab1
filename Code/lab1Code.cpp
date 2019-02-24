@@ -2,6 +2,7 @@
 #include <vector>
 #include <ctime>
 #include <cstdlib>
+#include <cassert>
 
 using namespace std;
 
@@ -225,8 +226,12 @@ int main(){
    auto n = 0;
    cout << "Please input the size(n) of the matrix: ";
    cin>> n;
+
+   //Handle Invariant violation
+   assert(n>1 && "THE SIZE OF THE MATRIX MUST BE GREATER THAN 1!");
    cout << endl;
-           
+          
+   //Addition and multiplication computations for 2D and 3D matrices
    _2D_computations(n);
    _3D_computations(n);
 
