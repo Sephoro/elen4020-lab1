@@ -1,0 +1,12 @@
+*.aux
+*.log
+*.o
+*.deb
+*.d
+*.app
+*.exe
+*.py.swp
+*.cls
+LabExercise01.pdf
+t1
+
